@@ -8,11 +8,11 @@
 
 import Cocoa
 
-class SilentView: NSView {
+public class SilentView: NSView {
 
     var reservedKeyEvents = [NSEvent]()
 
-    override var acceptsFirstResponder: Bool {
+    override public var acceptsFirstResponder: Bool {
         return true
     }
 
@@ -34,11 +34,11 @@ class SilentView: NSView {
         return false
     }
 
-    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+    override public func performKeyEquivalent(with event: NSEvent) -> Bool {
         return isRequired(event: event)
     }
 
-    override func keyDown(with event: NSEvent) {
+    override public func keyDown(with event: NSEvent) {
         if isRequired(event: event) == false {
             super.keyDown(with: event)
         }

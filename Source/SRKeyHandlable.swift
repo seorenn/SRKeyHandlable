@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SRKeyboardHandler {
+public class SRKeyboardHandler {
     let object: AnyObject
     var keyUpHandler: ((NSEvent) -> ())?
     var keyDownHandler: ((NSEvent) -> ())?
@@ -17,30 +17,30 @@ class SRKeyboardHandler {
         self.object = object
     }
 
-    func keyUp(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler {
+    public func keyUp(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler {
         keyUpHandler = handler
         return self
     }
 
-    func keyDown(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler {
+    public func keyDown(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler {
         keyDownHandler = handler
         return self
     }
 
-    func startHandle() {
+    public func startHandle() {
         assert(keyUpHandler != nil || keyDownHandler != nil, "you must set one of keyUp or keyDown")
         SRKeyboardManager.shared.removeHandlableViewController(object: object)
         SRKeyboardManager.shared.addHandlableViewController(object: object, keyDown: keyDownHandler, keyUp: keyUpHandler)
     }
 }
 
-protocol SRKeyHandlable: class {
+public protocol SRKeyHandlable: class {
     func keyUp(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler
     func keyDown(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler
     func stopHandleKeyboard()
 }
 
-extension SRKeyHandlable {
+public extension SRKeyHandlable {
 
     func keyUp(_ handler: @escaping (NSEvent) -> ()) -> SRKeyboardHandler {
         let h = SRKeyboardHandler(object: self)

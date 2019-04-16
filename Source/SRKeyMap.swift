@@ -10,7 +10,7 @@ import Cocoa
 
 public struct SRKeyMap {
 
-    static let keyCodeMap: [String : UInt16] = [
+    public static let keyCodeMap: [String : UInt16] = [
         "a": 0x00,
         "s": 0x01,
         "d": 0x02,
@@ -128,7 +128,7 @@ public struct SRKeyMap {
         "uparrow": 0x7E
     ]
 
-    static func string(keyCode: UInt16) -> String? {
+    public static func string(keyCode: UInt16) -> String? {
         for (key, value) in SRKeyMap.keyCodeMap {
             if value == keyCode {
                 return key

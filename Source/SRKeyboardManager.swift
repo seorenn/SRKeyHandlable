@@ -8,17 +8,17 @@
 
 import Cocoa
 
-struct SRKeyboardManagerItem {
+fileprivate struct SRKeyboardManagerItem {
     let object: AnyObject
     let keyDown: ((NSEvent) -> ())?
     let keyUp: ((NSEvent) -> ())?
 }
 
-class SRKeyboardManager: NSObject {
-    static let shared = SRKeyboardManager()
+public class SRKeyboardManager: NSObject {
+    public static let shared = SRKeyboardManager()
     private var queue = [SRKeyboardManagerItem]()
     
-    var isEnable: Bool = true
+    public var isEnable: Bool = true
     
     override init() {
         super.init()
@@ -28,7 +28,7 @@ class SRKeyboardManager: NSObject {
         }
     }
     
-    func handleKeyboard(event: NSEvent) {
+    public func handleKeyboard(event: NSEvent) {
         guard self.isEnable, let item = queue.last else { return }
         
         if event.type == .keyDown, let handler = item.keyDown {
@@ -38,11 +38,11 @@ class SRKeyboardManager: NSObject {
         }
     }
     
-    func addHandlableViewController(object: AnyObject, keyDown: ((NSEvent) -> ())?, keyUp: ((NSEvent) -> ())?) {
+    public func addHandlableViewController(object: AnyObject, keyDown: ((NSEvent) -> ())?, keyUp: ((NSEvent) -> ())?) {
         queue.append(SRKeyboardManagerItem(object: object, keyDown: keyDown, keyUp: keyUp))
     }
     
-    func removeHandlableViewController(object: AnyObject) {
+    public func removeHandlableViewController(object: AnyObject) {
         for (index, item) in queue.enumerated() {
             if item.object === object {
                 queue.remove(at: index)

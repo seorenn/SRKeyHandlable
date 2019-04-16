@@ -46,7 +46,7 @@ public extension NSEvent {
 
 // MARK: - Another constructor
 
-extension NSEvent {
+public extension NSEvent {
 
     static func keyEvent(withEmacsStyle keyString: String) -> NSEvent? {
         var components = keyString.components(separatedBy: "-")
